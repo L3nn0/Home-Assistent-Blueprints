@@ -20,11 +20,13 @@ blueprint:
     Heizung_einstellung_offen:
       name: Heizung Einstellung offen
       description: Die Heizung wird auf diese Einstellung gesetzt, wenn das Fenster geöffnet ist.
-        entity:
+      selector:
+        text:
     Heizung_einstellung_geschlossen:
       name: Heizung Einstellung geschlossen
       description: Die Heizung wird auf diese Einstellung gesetzt, wenn das Fenster geschlossen ist.
-        entity:
+      selector:
+        text:
 
 
 
