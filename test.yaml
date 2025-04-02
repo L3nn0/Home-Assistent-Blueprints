@@ -15,17 +15,21 @@ blueprint:
             description: Die Heizung, die synchronisiert werden soll.
             selector:
                 entity:
-                    domain: climate
+                    filter:
+                        domain: climate
         Heizung_einstellung_offen:
             name: Heizung Einstellung offen
-            description: Die Heizung wird auf diese Einstellung gesetzt, wenn das Fenster geöffnet ist.
             selector:
-                text:
+                entity:
+                    filter:
+                        domain: input_text
         Heizung_einstellung_geschlossen:
             name: Heizung Einstellung geschlossen
             description: Die Heizung wird auf diese Einstellung gesetzt, wenn das Fenster geschlossen ist.
             selector:
-                text:
+                entity:
+                    filter:
+                        domain: input_text
 
 triggers:
     - platform: state
