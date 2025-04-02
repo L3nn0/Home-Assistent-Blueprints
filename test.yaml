@@ -26,27 +26,27 @@ blueprint:
             default: ""
 
 triggers:
-    - platform: state
-        entity_id: !input fenster_sensor
+  - platform: state
+    entity_id: !input fenster_sensor
 actions:
-    - choose:
-            - conditions:
-                    - condition: state
-                        entity_id: !input fenster_sensor
-                        state: 'on'
-                sequence:
-                    - service: climate.set_preset_mode
-                        data:
-                            preset_mode: !input Heizung_einstellung_offen
-                        target:
-                            entity_id: !input Ziel_heizkoerper
-            - conditions:
-                    - condition: state
-                        entity_id: !input fenster_sensor
-                        state: 'off'
-                sequence:
-                    - service: climate.set_preset_mode
-                        data:
-                            preset_mode: !input Heizung_einstellung_geschlossen
-                        target:
-                            entity_id: !input Ziel_heizkoerper
+  - choose:
+      - conditions:
+          - condition: state
+            entity_id: !input fenster_sensor
+            state: 'on'
+        sequence:
+          - service: climate.set_preset_mode
+            data:
+              preset_mode: !input Heizung_einstellung_offen
+            target:
+              entity_id: !input Ziel_heizkoerper
+      - conditions:
+          - condition: state
+            entity_id: !input fenster_sensor
+            state: 'off'
+        sequence:
+          - service: climate.set_preset_mode
+            data:
+              preset_mode: !input Heizung_einstellung_geschlossen
+            target:
+              entity_id: !input Ziel_heizkoerper
