@@ -1,0 +1,59 @@
+blueprint:
+  name: Fenster/Heizung Synchronisation
+  domain: automation
+  input:
+    fenster_sensor:
+      name: Fenster Sensor
+      description: Dieser Sensor wird die Synchronisation auslösen.
+      selector:
+        entity:
+          filter:
+            - domain: binary_sensor
+              device_class: window
+    Ziel_heizkoerper:
+      name: Ziel Heizung
+      description: Die Heizung, die synchronisiert werden soll.
+      selector:
+        target:
+          device:
+            - domain: climate
+    Heizung_einstellung_offen:
+      name: Heizung Einstellung offen
+      description: Die Heizung wird auf diese Einstellung gesetzt, wenn das Fenster geöffnet ist.
+        entity:
+    Heizung_einstellung_geschlossen:
+      name: Heizung Einstellung geschlossen
+      description: Die Heizung wird auf diese Einstellung gesetzt, wenn das Fenster geschlossen ist.
+        entity:
+
+
+
+triggers:
+  - trigger: state
+    entity_id: !input fenster_sensor
+actions:
+  - choose:
+      - conditions:
+          - type: is_open
+            condition: device 
+            entity_id: !input fenster_sensor
+            domain: binary_sensor
+        sequence:
+          - action: climate.set_preset_mode
+            metadata: {}
+            data:
+              preset_mode: !input Heizung_einstellung_offen
+            target:
+              device_id: !input Ziel_heizkoerper
+      - conditions:
+          - type: is_not_open
+            condition: device
+            entity_id: !input fenster_sensor
+            domain: binary_sensor
+        sequence:
+          - action: climate.set_preset_mode
+            metadata: {}
+            data:
+              preset_mode: !input Heizung_einstellung_geschlossen
+            target:
+              device_id: !input Ziel_heizkoerper
