@@ -19,17 +19,12 @@ blueprint:
                         domain: climate
         Heizung_einstellung_offen:
             name: Heizung Einstellung offen
-            selector:
-                entity:
-                    filter:
-                        domain: input_text
+            description: Die Einstellung, wenn das Fenster geöffnet ist.
+            default: ""
         Heizung_einstellung_geschlossen:
             name: Heizung Einstellung geschlossen
-            description: Die Heizung wird auf diese Einstellung gesetzt, wenn das Fenster geschlossen ist.
-            selector:
-                entity:
-                    filter:
-                        domain: input_text
+            description: Die Einstellung, wenn das Fenster geschlossen ist.
+            default: ""
 
 triggers:
     - platform: state
